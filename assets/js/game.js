@@ -8,6 +8,7 @@ var enemyHealth = 50;
 var enemyAttack = 12;
 
 var fight = function(enemyName)  {
+  while(enemyHealth > 0) {
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or SKIP to choose.");
   //Subtract the value of `playerAttack` from the value of `enemyHealth` and use that result to update the value in the `enemyHealth` variable
   // if player choses to fight, then fight
@@ -47,9 +48,10 @@ var fight = function(enemyName)  {
       else{
           fight();
       }
-    window.alert(playerName + " has chosen to skip the fight!");
-  } else {
-    window.alert("You need to choose a valid option. Try again!");
+      window.alert(playerName + " has chosen to skip the fight!");
+    } else {
+      window.alert("You need to choose a valid option. Try again!");
+    }
   }
 }
 //function to start a new game
