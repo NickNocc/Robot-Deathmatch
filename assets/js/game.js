@@ -1,3 +1,6 @@
+//ENDED ON 3.5.5
+
+
 var fight = function(enemy)  {
   while(enemy.health > 0) {
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or SKIP to choose.");
