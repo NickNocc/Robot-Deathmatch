@@ -1,11 +1,11 @@
-
+//ended 3.5.6
 
 
 var fight = function(enemy)  {
   while(enemy.health > 0) {
   fightOrSkip();
-  var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
-
+  if (fightOrSkip) {
+    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
     enemy.health = Math.max(0, enemy.health - damage);
 
     console.log(
@@ -33,6 +33,10 @@ var fight = function(enemy)  {
     } else {
       window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
     } 
+  }
+  if (!fightOrSkip){
+
+  }
   }
 }
 //function to start a new game
@@ -89,22 +93,19 @@ var shop = function() {
   //asks the player what they want to do
   var shopOptionPrompt = window.prompt(
     "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
-  switch (shopOptionPrompt) {
-    case "refill":
-    case "REFILL":
+    debugger;
+    switch(shopOptionPrompt){
+    case 1:
       playerInfo.refillHealth();
       break;
-    case "upgrade":
-    case "UPGRADE":
-     playerInfo.refillHealth();
+    case 2:
+      playerInfo.UpgradeAttack();
       break;
-    case "leave":
-    case "LEAVE":
-      window.alert("Leaving the store.");
+    case 3:
+      window.alert("Leaving the store");
       break;
     default:
-      window.alert("You did not picka a valid option. Try again.");
-      shop();
+      window.alert("You did not pick a valid option. Try again.");
       break;
   }
 };
@@ -180,12 +181,13 @@ var fightOrSkip = function() {
   if (promptFight === "fight" || promptFight === "FIGHT") {
     // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
     // if player choses to skip
-  } else if (promptFight === "skip" || promptFight === "SKIP") {
-      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-      if (confirmSkip) {
-          window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-          playerInfo.money = Math.max(0, playerInfo.money - 10);
-          return true;
+  }
+  if (promptFight === "skip" || promptFight === "SKIP") {
+    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+    if (confirmSkip) {
+      window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+       playerInfo.money = Math.max(0, playerInfo.money - 10);
+       return true;
       }
       else{
           fight();
