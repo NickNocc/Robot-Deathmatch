@@ -1,14 +1,10 @@
-//ENDED ON 3.5.5
+
 
 
 var fight = function(enemy)  {
   while(enemy.health > 0) {
-    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or SKIP to choose.");
-  //Subtract the value of `playerInfo.attack` from the value of `enemy.health` and use that result to update the value in the `enemy.health` variable
-  // if player choses to fight, then fight
-  if (promptFight === "fight" || promptFight === "FIGHT") {
-    // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
-    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+  fightOrSkip();
+  var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
 
     enemy.health = Math.max(0, enemy.health - damage);
 
@@ -36,21 +32,7 @@ var fight = function(enemy)  {
       break;
     } else {
       window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
-    }
-    // if player choses to skip
-  } else if (promptFight === "skip" || promptFight === "SKIP") {
-      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-      if (confirmSkip) {
-          window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-          playerInfo.money = Math.max(0, playerInfo.money - 10);
-      }
-      else{
-          fight();
-      }
-      window.alert(playerInfo.name + " has chosen to skip the fight!");
-    } else {
-      window.alert("You need to choose a valid option. Try again!");
-    }
+    } 
   }
 }
 //function to start a new game
@@ -187,6 +169,33 @@ var enemyInfo = [
     attack: randomNumber(10, 14)
   }
 ];
+
+var fightOrSkip = function() {
+  var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or SKIP to choose.");
+  if (promptFight === "" || promptFight === null) {
+    window.alert("You need to provide a valid answer! Please try again");
+    return fightOrSkip();
+  }
+  promptFight = promptFight.toLowerCase();
+  if (promptFight === "fight" || promptFight === "FIGHT") {
+    // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
+    // if player choses to skip
+  } else if (promptFight === "skip" || promptFight === "SKIP") {
+      var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+      if (confirmSkip) {
+          window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+          playerInfo.money = Math.max(0, playerInfo.money - 10);
+          return true;
+      }
+      else{
+          fight();
+      }
+      window.alert(playerInfo.name + " has chosen to skip the fight!");
+    } else {
+      window.alert("You need to choose a valid option. Try again!");
+    }
+    return false;
+}
 
 startGame();
 
